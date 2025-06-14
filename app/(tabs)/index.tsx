@@ -1,75 +1,125 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useState } from 'react';
+import { Image, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 
 export default function HomeScreen() {
+  const [sendOpen, setSendOpen] = useState(false);
+  const [receiveOpen, setReceiveOpen] = useState(false);
+  const colorScheme = useColorScheme();
+
+  const styles = createStyles(colorScheme);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+    <ThemedView style={styles.container}>
+      <ThemedView style={styles.header}>
+        <ThemedText style={styles.title}>Paytos</ThemedText>
+        <ThemedView style={styles.subtitleContainer}></ThemedView>
+          <ThemedText style={styles.subtitle}>Pay tokens over SMS</ThemedText>
+          <Image 
+            source={{ uri: 'https://cryptologos.cc/logos/solana-sol-logo.png' }}
+            style={styles.solanaLogo}
+            resizeMode="contain"
+          />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
+
+      <ThemedView style={styles.tabContainer}>
+        <TouchableOpacity 
+          style={styles.tab} 
+          onPress={() => setSendOpen(!sendOpen)}
+        >
+          <ThemedText style={styles.tabText}>Send</ThemedText>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.tab} 
+          onPress={() => setReceiveOpen(!receiveOpen)}
+        >
+          <ThemedText style={styles.tabText}>Receive</ThemedText>
+        </TouchableOpacity>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      
+      {sendOpen && (
+        <ThemedView style={styles.popup}>
+          <ThemedText style={styles.popupTitle}>Send Money</ThemedText>
+          <ThemedText style={styles.popupText}>Enter recipient details and amount to send money.</ThemedText>
+          <ThemedText style={styles.popupText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</ThemedText>
+        </ThemedView>
+      )}
+      
+      {receiveOpen && (
+        <ThemedView style={styles.popup}>
+          <ThemedText style={styles.popupTitle}>Receive Money</ThemedText>
+          <ThemedText style={styles.popupText}>Share your details to receive money from others.</ThemedText>
+          <ThemedText style={styles.popupText}>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</ThemedText>
+        </ThemedView>
+      )}
+    </ThemedView>
   );
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+const createStyles = (colorScheme: 'light' | 'dark' | null | undefined) => StyleSheet.create({
+  container: {
+    flex: 1,
     alignItems: 'center',
-    gap: 8,
+    paddingTop: 100,
+    paddingHorizontal: 20,
   },
-  stepContainer: {
-    gap: 8,
+  header: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  subtitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: colorScheme === 'dark' ? '#B0B0B0' : '#666666',
+  },
+  solanaLogo: {
+    width: 24,
+    height: 24,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    gap: 20,
+    marginBottom: 20,
+  },
+  tab: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: colorScheme === 'dark' ? '#4A90E2' : '#A1CEDC',
+  },
+  tabText: {
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
+    fontWeight: '600',
+  },
+  popup: {
+    backgroundColor: colorScheme === 'dark' ? '#2A2A2A' : '#f0f0f0',
+    padding: 20,
+    borderRadius: 10,
+    marginHorizontal: 20,
+    gap: 10,
+    width: '90%',
+    borderWidth: 1,
+    borderColor: colorScheme === 'dark' ? '#444444' : '#e0e0e0',
+  },
+  popupTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
+  },
+  popupText: {
+    color: colorScheme === 'dark' ? '#E0E0E0' : '#333333',
+    lineHeight: 20,
   },
 });
