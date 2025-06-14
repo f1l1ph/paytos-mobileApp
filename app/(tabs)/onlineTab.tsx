@@ -2,48 +2,59 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import { StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();
   const walletAddress = "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM";
   const solBalance = "1.2345";
   const usdValue = "$45.67";
-
+//urls of logos are some random aigenerated, please replace with actual token logos
   const tokens = [
-    { symbol: "SOL", balance: "1.2345", usdValue: "$45.67", icon: "sun.max.fill" },
-    { symbol: "USDC", balance: "100.00", usdValue: "$100.00", icon: "dollarsign.circle.fill" },
-    { symbol: "RAY", balance: "25.8", usdValue: "$12.34", icon: "bolt.circle.fill" },
-    { symbol: "BONK", balance: "1,000,000", usdValue: "$8.90", icon: "flame.fill" },
+    { 
+      symbol: "SOL", 
+      balance: "1.2345", 
+      usdValue: "$45.67", 
+      logoUrl: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png"
+    },
+    { 
+      symbol: "USDC", 
+      balance: "100.00", 
+      usdValue: "$100.00", 
+      logoUrl: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png"
+    },
+    { 
+      symbol: "RAY", 
+      balance: "25.8", 
+      usdValue: "$12.34", 
+      logoUrl: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/logo.png"
+    },
+    { 
+      symbol: "BONK", 
+      balance: "1,000,000", 
+      usdValue: "$8.90", 
+      logoUrl: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263/logo.png"
+    },
   ];
 
-  const isDark = colorScheme === 'dark';
+  const styles = createStyles(colorScheme);
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#9945FF', dark: '#9945FF' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#14F195"
-          name="creditcard.fill"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.walletContainer}>
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#4A90E2' }}
+      headerImage={<></>}
+    >
+      <ThemedView style={styles.walletContainer}></ThemedView>
         <ThemedText type="title" style={styles.walletTitle}>Solana Wallet</ThemedText>
         
         {/* Wallet Address */}
         <ThemedView style={styles.addressContainer}>
           <ThemedText style={styles.addressLabel}>Wallet Address</ThemedText>
-          <TouchableOpacity style={[
-            styles.addressBox, 
-            { backgroundColor: isDark ? '#2a2a2a' : '#f5f5f5' }
-          ]}>
+          <TouchableOpacity style={styles.addressBox}>
             <ThemedText style={styles.addressText}>
               {walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}
             </ThemedText>
-            <IconSymbol name="doc.on.doc.fill" size={16} color="#9945FF" />
+            <IconSymbol name="doc.on.doc.fill" size={16} color={colorScheme === 'dark' ? '#4A90E2' : '#A1CEDC'} />
           </TouchableOpacity>
         </ThemedView>
 
@@ -56,15 +67,15 @@ export default function TabTwoScreen() {
         {/* Action Buttons */}
         <ThemedView style={styles.actionsContainer}>
           <TouchableOpacity style={styles.actionButton}>
-            <IconSymbol name="arrow.up.circle.fill" size={20} color="white" />
+            <IconSymbol name="arrow.up.circle.fill" size={20} color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} />
             <ThemedText style={styles.actionText}>Send</ThemedText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <IconSymbol name="arrow.down.circle.fill" size={20} color="white" />
+            <IconSymbol name="arrow.down.circle.fill" size={20} color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} />
             <ThemedText style={styles.actionText}>Receive</ThemedText>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <IconSymbol name="arrow.triangle.2.circlepath" size={20} color="white" />
+            <IconSymbol name="arrow.triangle.2.circlepath" size={20} color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} />
             <ThemedText style={styles.actionText}>Swap</ThemedText>
           </TouchableOpacity>
         </ThemedView>
@@ -75,17 +86,15 @@ export default function TabTwoScreen() {
           {tokens.map((token, index) => (
             <TouchableOpacity 
               key={index} 
-              style={[
-                styles.tokenItem,
-                { backgroundColor: isDark ? '#2a2a2a' : '#f9f9f9' }
-              ]}
+              style={styles.tokenItem}
             >
               <ThemedView style={styles.tokenLeft}>
-                <ThemedView style={[
-                  styles.tokenIcon,
-                  { backgroundColor: isDark ? '#3a3a3a' : '#f0f0f0' }
-                ]}>
-                  <IconSymbol name={token.icon} size={24} color="#9945FF" />
+                <ThemedView style={styles.tokenIcon}>
+                  <Image 
+                    source={{ uri: token.logoUrl }}
+                    style={styles.tokenLogo}
+                    resizeMode="contain"
+                  />
                 </ThemedView>
                 <ThemedView>
                   <ThemedText style={styles.tokenSymbol}>{token.symbol}</ThemedText>
@@ -98,17 +107,11 @@ export default function TabTwoScreen() {
             </TouchableOpacity>
           ))}
         </ThemedView>
-      </ThemedView>
     </ParallaxScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  headerImage: {
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
+const createStyles = (colorScheme: 'light' | 'dark' | null | undefined) => StyleSheet.create({
   walletContainer: {
     flex: 1,
     padding: 20,
@@ -116,14 +119,15 @@ const styles = StyleSheet.create({
   walletTitle: {
     textAlign: 'center',
     marginBottom: 20,
-    color: '#9945FF',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
+    fontWeight: 'bold',
   },
   addressContainer: {
     marginBottom: 20,
   },
   addressLabel: {
     fontSize: 14,
-    opacity: 0.7,
+    color: colorScheme === 'dark' ? '#B0B0B0' : '#666666',
     marginBottom: 8,
   },
   addressBox: {
@@ -132,10 +136,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 12,
     borderRadius: 8,
+    backgroundColor: colorScheme === 'dark' ? '#2A2A2A' : '#f0f0f0',
+    borderWidth: 1,
+    borderColor: colorScheme === 'dark' ? '#444444' : '#e0e0e0',
   },
   addressText: {
     fontFamily: 'monospace',
     fontSize: 14,
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
   },
   balanceContainer: {
     alignItems: 'center',
@@ -145,11 +153,11 @@ const styles = StyleSheet.create({
   balanceAmount: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#9945FF',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
   },
   balanceUsd: {
     fontSize: 18,
-    opacity: 0.7,
+    color: colorScheme === 'dark' ? '#B0B0B0' : '#666666',
     marginTop: 4,
   },
   actionsContainer: {
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   actionButton: {
-    backgroundColor: '#9945FF',
+    backgroundColor: colorScheme === 'dark' ? '#4A90E2' : '#A1CEDC',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 12,
@@ -166,7 +174,7 @@ const styles = StyleSheet.create({
     minWidth: 80,
   },
   actionText: {
-    color: 'white',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
     marginTop: 4,
     fontSize: 12,
     fontWeight: '600',
@@ -176,7 +184,8 @@ const styles = StyleSheet.create({
   },
   tokensTitle: {
     marginBottom: 16,
-    color: '#9945FF',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
+    fontWeight: 'bold',
   },
   tokenItem: {
     flexDirection: 'row',
@@ -186,6 +195,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 12,
     marginBottom: 8,
+    backgroundColor: colorScheme === 'dark' ? '#2A2A2A' : '#f0f0f0',
+    borderWidth: 1,
+    borderColor: colorScheme === 'dark' ? '#444444' : '#e0e0e0',
   },
   tokenLeft: {
     flexDirection: 'row',
@@ -198,14 +210,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
+    backgroundColor: colorScheme === 'dark' ? '#444444' : '#e0e0e0',
   },
   tokenSymbol: {
     fontSize: 16,
     fontWeight: '600',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
   },
   tokenBalance: {
     fontSize: 14,
-    opacity: 0.7,
+    color: colorScheme === 'dark' ? '#B0B0B0' : '#666666',
   },
   tokenRight: {
     alignItems: 'flex-end',
@@ -213,5 +227,6 @@ const styles = StyleSheet.create({
   tokenUsd: {
     fontSize: 16,
     fontWeight: '500',
+    color: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
   },
 });
