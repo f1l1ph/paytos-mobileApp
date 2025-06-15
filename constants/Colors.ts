@@ -1,26 +1,43 @@
 /**
  * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Using Paytos brand colors: #f7f5f2 (cream) and #1571e2 (blue)
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const paytosBrandBlue = '#1571e2';
+const paytosBrandCream = '#f7f5f2';
 
 export const Colors = {
   light: {
     text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
+    background: paytosBrandCream,
+    tint: paytosBrandBlue,
     icon: '#687076',
     tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    tabIconSelected: paytosBrandBlue,
+    card: '#ffffff',
+    border: '#e0e0e0',
+    accent: paytosBrandBlue,
+    success: '#22c55e',
+    warning: '#f59e0b',
+    error: '#ef4444',
   },
   dark: {
     text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
+    background: '#0f1419',
+    tint: paytosBrandCream,
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    tabIconSelected: paytosBrandCream,
+    card: '#1a1a1a',
+    border: '#333333',
+    accent: paytosBrandBlue,
+    success: '#22c55e',
+    warning: '#f59e0b',
+    error: '#ef4444',
   },
+};
+
+export const PaytosColors = {
+  blue: paytosBrandBlue,
+  cream: paytosBrandCream,
 };

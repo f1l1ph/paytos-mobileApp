@@ -1,7 +1,7 @@
 // Fallback for using MaterialIcons on Android and web.
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { SymbolWeight, SymbolViewProps } from 'expo-symbols';
+import { SymbolViewProps, SymbolWeight } from 'expo-symbols';
 import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
@@ -18,6 +18,27 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'gear': 'settings',
+  'eye.fill': 'visibility',
+  'eye.slash.fill': 'visibility-off',
+  'doc.on.doc.fill': 'content-copy',
+  'arrow.up': 'keyboard-arrow-up',
+  'arrow.down': 'keyboard-arrow-down',
+  'arrow.triangle.2.circlepath': 'sync',
+  'plus': 'add',
+  'arrow.up.circle.fill': 'keyboard-arrow-up',
+  'arrow.down.circle.fill': 'keyboard-arrow-down',
+  'bolt.fill': 'flash-on',
+  'arrow.clockwise': 'refresh',
+  'chart.bar': 'bar-chart',
+  'doc.text': 'description',
+  'info.circle': 'info',
+  'xmark': 'close',
+  'chevron.up': 'keyboard-arrow-up',
+  'chevron.down': 'keyboard-arrow-down',
+  'arrow.up.arrow.down': 'swap-vert',
+  'person.badge.plus': 'person-add',
+  'chart.line.uptrend.xyaxis': 'trending-up',
 } as IconMapping;
 
 /**

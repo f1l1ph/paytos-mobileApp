@@ -1,50 +1,187 @@
-# Welcome to your Expo app 👋
+# 🪙 Paytos Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive Solana wallet application showcasing both **Online** and **Offline (SMS)** modes for blockchain transactions, bridging Web3 and traditional mobile money.
 
-## Get started
+## 🌟 Features
 
-1. Install dependencies
+### 💎 Modern Wallet Interface
+- **Clean, Metamask/Phantom-inspired UI/UX**
+- **Real-time portfolio tracking** with live prices
+- **Multi-token support**: SOL, USDC, USDT, PYUSD
+- **DeFi positions** and **NFT collection** views
+- **Transaction history** and activity tracking
+- **Dark/Light theme** support with Paytos brand colors
 
+### 🌐 Online Mode
+- Full blockchain connectivity interface
+- Send, Receive, Swap, and Stake functionality
+- Advanced portfolio analytics
+- DeFi position tracking
+- Real-time transaction processing
+- Advanced settings and history
+
+### 📱 SMS Mode (Offline)
+- **SMS-based transactions** for users without internet
+- **Interactive message drafting** with preview
+- **One-tap SMS sending** to Paytos service number
+- Support for all core operations:
+  - **Register** new wallet with PIN
+  - **Check balance** 
+  - **Send tokens** to phone numbers
+- Clean, intuitive interface for non-technical users
+
+## 🎨 Design
+
+Built with **Paytos brand colors**:
+- Primary: `#1571e2` (Blue)
+- Background: `#f7f5f2` (Cream)
+- Consistent theming across all components
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ and npm
+- Expo CLI
+- iOS Simulator / Android Emulator (optional)
+
+### Installation
+
+1. **Clone and install dependencies:**
    ```bash
+   git clone https://github.com/f1l1ph/paytos-mobileApp.git
+   cd paytos-mobileApp
    npm install
    ```
 
-2. Start the app
-
+2. **Start the development server:**
    ```bash
-   npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+3. **Open the app:**
+   - Scan QR code with Expo Go app
+   - Press `i` for iOS Simulator
+   - Press `a` for Android Emulator
+   - Press `w` for web browser
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📖 How to Use
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 🏠 Wallet Tab
+- View your **portfolio overview** with total balance
+- Toggle **balance visibility** with eye icon
+- **Copy wallet address** by tapping the address box
+- Access **quick actions**: Send, Receive, Swap, Stake
+- Browse your **token holdings** and **recent activity**
+- View **DeFi positions** and advanced features
+- Configure **transaction settings** and analytics
 
-## Get a fresh project
+### 📲 SMS Tab (The Star Feature!)
+- Choose from **three main actions**:
+  1. **Register Wallet** - Create new SMS wallet with PIN
+  2. **Check Balance** - View current token balances  
+  3. **Send Money** - Transfer tokens to phone numbers
 
-When you're ready, run:
+- For each action:
+  1. **Fill required information** (PIN, amount, recipient, etc.)
+  2. **Preview the SMS** that will be sent
+  3. **Tap "Send SMS"** to open your messages app
+  4. The SMS is **pre-composed** and ready to send to `+1234567890`
 
-```bash
-npm run reset-project
+### 📨 SMS Commands Format
+```
+REGISTER <PIN>
+BALANCE <PIN>  
+SEND <phone_number> <amount> <token> <PIN>
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🛠 Technical Details
 
-## Learn more
+### Architecture
+- **React Native** with **Expo Router**
+- **TypeScript** for type safety
+- **Context API** for state management
+- **expo-sms** for SMS functionality
+- **Themed components** for consistent styling
 
-To learn more about developing your project with Expo, look at the following resources:
+### Key Components
+- `AppProvider` - Global state management
+- `WalletScreen` - Main portfolio interface
+- `OnlineTab` - Advanced trading features
+- `OfflineTab` - SMS interaction interface
+- Themed components for consistent design
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### File Structure
+```
+app/
+├── (tabs)/
+│   ├── index.tsx        # Main wallet interface with all features
+│   ├── offlineTab.tsx   # SMS functionality
+│   └── _layout.tsx      # Tab navigation
+├── _layout.tsx          # Root layout with app provider
+components/              # Reusable UI components
+constants/
+└── Colors.ts           # Paytos brand colors
+hooks/
+└── useAppContext.tsx   # Global state management
+```
 
-## Join the community
+## 🎯 Use Cases
 
-Join our community of developers creating universal apps.
+### For Users
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. **Full-Featured Wallet**:
+   - Navigate through the modern wallet interface
+   - Manage portfolio overview and token holdings
+   - Access transaction history and activity feeds
+   - Use advanced DeFi features and analytics
+
+2. **Offline Accessibility**:
+   - Switch to SMS tab when internet is unavailable
+   - Register new wallet via SMS commands
+   - Send money using simple text messages
+   - Copy or send SMS messages directly from the app
+
+### Key Benefits
+- "**Bridging Web3 and traditional mobile money**"
+- "**No internet required** for basic transactions"
+- "**Feature phone compatibility** through SMS"
+- "**Financial inclusion** for underserved markets"
+- "**Production-ready UI/UX** with clean design"
+
+## 🔧 Production Considerations
+
+For a real deployment, you would need to:
+
+1. **Backend SMS Gateway** (Twilio integration)
+2. **Custodial wallet management** system
+3. **Real Solana blockchain** integration
+4. **SMS number provisioning** and carrier partnerships
+5. **PIN security** and user authentication
+6. **Transaction confirmation** flows
+
+## 🌍 Real-World Impact
+
+This demo showcases how **Paytos** can serve:
+- **Feature phone users** in developing markets
+- **Areas with poor internet** connectivity  
+- **Financial inclusion** initiatives
+- **Remittance** and **micro-payments**
+- **Emergency transaction** scenarios
+
+## 🤝 Contributing
+
+For production development and improvements:
+
+1. Fork the repository
+2. Create feature branches
+3. Follow the existing code style
+4. Test on multiple devices
+5. Submit pull requests
+
+## 📄 License
+
+MIT License - feel free to use this application as inspiration for your own projects!
+
+---
+
+**Built with ❤️ for financial inclusion and Web3 accessibility**
